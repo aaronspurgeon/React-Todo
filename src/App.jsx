@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import data from './data';
+import TodoForm from './components/TodoComponents/TodoForm';
 
 
 class App extends React.Component {
@@ -59,6 +60,7 @@ class App extends React.Component {
             onClick={(e) => this.toggleItem(e, item.id)}
           />
         })}
+        <TodoForm addTask={this.addTask}/>
       </div>
     );
   }
