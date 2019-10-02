@@ -2,6 +2,7 @@ import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import data from './data';
 import TodoForm from './components/TodoComponents/TodoForm';
+import './App.scss';
 
 
 class App extends React.Component {
@@ -51,16 +52,17 @@ class App extends React.Component {
   // this component is going to take care of state, and any change handlers you need to work with your state
   render() {
     return (
-      <div style={{textAlign: 'center'}}>
+      <div style={{textAlign: 'center'}} className={'App'}>
         <h1>Tasks you need to do ASAP!</h1>
         {this.state.tasks.map(item => {
           return <TodoList
             key={item.id}
             item={item}
-            onClick={(e) => this.toggleItem(e, item.id)}
+            onClick={(e) => this.toggleTask(e, item.id)}
           />
         })}
         <TodoForm addTask={this.addTask}/>
+        <button onClick={this.clearCompleted}>Delete Completed</button>
       </div>
     );
   }
