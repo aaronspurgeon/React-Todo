@@ -54,15 +54,17 @@ class App extends React.Component {
     return (
       <div style={{textAlign: 'center'}} className={'App'}>
         <h1>Tasks you need to do ASAP!</h1>
-        {this.state.tasks.map(item => {
-          return <TodoList
-            key={item.id}
-            item={item}
-            onClick={(e) => this.toggleTask(e, item.id)}
-          />
-        })}
         <TodoForm addTask={this.addTask}/>
-        <button onClick={this.clearCompleted}>Delete Completed</button>
+        <div className='tasks'>
+          {this.state.tasks.map(item => {
+            return <TodoList
+              key={item.id}
+              item={item}
+              onClick={(e) => this.toggleTask(e, item.id)}
+            />
+          })}
+        </div>
+        <button className='deleteBtn' onClick={this.clearCompleted}>Delete Completed</button>
       </div>
     );
   }
