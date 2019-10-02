@@ -1,5 +1,6 @@
 import React from 'react';
 import Todo from './components/TodoComponents/Todo';
+import TodoList from './components/TodoComponents/TodoList';
 
 
 class App extends React.Component {
@@ -11,15 +12,8 @@ class App extends React.Component {
       completed: false
     }
   }
-  deleteTask = () => {
-    if (completed === true) {
-      
-    }
-  }
-  addTask = (event) => {
-    this.setState({
-      task: (event.currentTarget)
-    })
+  toggleTask = (even, itemID) => {
+
   }
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -28,7 +22,9 @@ class App extends React.Component {
     return (
       <div style={{textAlign: 'center'}}>
         <h1>Tasks you need to do ASAP!</h1>
-        <Todo task={this.state.task} />
+        {this.state.task.map(task => (
+                <TodoList key={task.id} task={task} onClick={e => this.toggleItem(e, task.id)}/>
+            ))}
       </div>
     );
   }

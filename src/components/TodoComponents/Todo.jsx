@@ -5,7 +5,7 @@ import TodoForm from './TodoForm';
 const Todo = (props) => {
     return (
         <div>
-            <TodoList task={props.task}/>
+            
             <TodoForm />
         </div>
     )

@@ -5,7 +5,6 @@ const TodoForm = (props) => {
         <>
             <input type="text"/>
             <button>Add Task</button>
-            <button>Delete Completed</button>
         </>
     )
 }
