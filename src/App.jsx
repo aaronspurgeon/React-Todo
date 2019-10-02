@@ -1,19 +1,49 @@
 import React from 'react';
-import Todo from './components/TodoComponents/Todo';
 import TodoList from './components/TodoComponents/TodoList';
+import data from './data';
 
 
 class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      task: 'Test Task',
-      id: 1,
-      completed: false
+      tasks: data,
     }
   }
-  toggleTask = (even, itemID) => {
+  toggleTask = (event, itemID) => {
+    event.preventDefault()
+    this.setState({
+      tasks: this.state.tasks.map(item => {
+        if (item.id === itemID) {
+          return {
+            ...item, completed: !item.completed
+          }
+        } else {
+          return item
+        }
+      })
+    })
+  }
 
+
+  clearCompleted = event => {
+    event.preventDefault()
+    this.setState({
+      tasks: this.state.tasks.filter(item => {
+        return !item.completed
+      })
+    })
+  }
+
+  addTask = (event, taskName) => {
+    const newTask = {
+      task: taskName,
+      id: Date.now(),
+      completed: false
+    }
+    this.setState({
+      tasks: [newTask, ...this.state.tasks]
+    })
   }
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -22,9 +52,13 @@ class App extends React.Component {
     return (
       <div style={{textAlign: 'center'}}>
         <h1>Tasks you need to do ASAP!</h1>
-        {this.state.task.map(task => (
-                <TodoList key={task.id} task={task} onClick={e => this.toggleItem(e, task.id)}/>
-            ))}
+        {this.state.tasks.map(item => {
+          return <TodoList
+            key={item.id}
+            item={item}
+            onClick={(e) => this.toggleItem(e, item.id)}
+          />
+        })}
       </div>
     );
   }
